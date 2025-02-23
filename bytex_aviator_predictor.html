@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>BYTEX AVIATOR PREDICTOR PRO</title>  
+    <style>  
+        body {  
+            background: url('https://dl.dropboxusercontent.com/scl/fi/opptdtk92bl4jvw6t31yq/IMG-20250218-WA0007.jpg?rlkey=4br287q5onf9v4myjb7usbk1d&st=rhx8f9zt') no-repeat center center fixed;  
+            background-size: cover;  
+            font-family: Arial, sans-serif;  
+            text-align: center;  
+            color: white;  
+        }  
+        .title {  
+            font-size: 2.5em;  
+            font-weight: bold;  
+            padding: 20px;  
+            display: inline-block;  
+            background: linear-gradient(45deg, red, yellow, green, blue, purple);  
+            -webkit-background-clip: text;  
+            -webkit-text-fill-color: transparent;  
+            border: 5px solid white;  
+            padding: 10px 20px;  
+            border-radius: 15px;  
+        }  
+        .time-box {  
+            background: rgba(0, 0, 0, 0.7);  
+            padding: 15px;  
+            display: inline-block;  
+            border-radius: 10px;  
+            margin: 10px;  
+            font-size: 1.5em;  
+        }  
+        .next-container {  
+            display: flex;  
+            flex-direction: column;  
+            align-items: center;  
+            gap: 5px;  
+        }  
+        .next-label {  
+            font-size: 1.5em;  
+            font-weight: bold;  
+            background: rgba(0, 0, 255, 0.2);  
+            padding: 10px 20px;  
+            border-radius: 10px;  
+            color: #00BFFF;  
+            text-shadow: 0px 0px 10px rgba(0, 0, 255, 0.8);  
+            border: 2px solid #00BFFF;  
+        }  
+        .next-time-box {  
+            display: inline-block;  
+            padding: 20px;  
+            font-size: 2em;  
+            font-weight: bold;  
+            color: red;  
+            background: rgba(0, 0, 0, 0.7);  
+            border-radius: 15px;  
+            position: relative;  
+            z-index: 1;  
+            border: 5px solid transparent;  
+            animation: glowing-border 3s infinite linear;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <h1 class="title">BYTEX AVIATOR PREDICTOR PRO</h1>  
+    <div class="time-box">  
+        <p>දැනට සජීවී කාලය: <span id="liveTime"></span></p>  
+    </div>  
+    <div class="next-container">  
+        <div class="next-label">NEXT AVIATOR 7 ODD TIME</div>  
+        <div class="next-time-box">  
+            <p id="nextTime">ඊළඟ කාලය: ගණනය කරමින්...</p>  
+        </div>  
+    </div>  
+    <script>  
+        function updateLiveTime() {  
+            const now = new Date();  
+            const hours = String(now.getHours()).padStart(2, '0');  
+            const minutes = String(now.getMinutes()).padStart(2, '0');  
+            const seconds = String(now.getSeconds()).padStart(2, '0');  
+            document.getElementById("liveTime").textContent = `${hours}:${minutes}:${seconds}`;
+            const minutePairs = [["02", "03"], ["08", "09"], ["14", "15"], ["20", "22"], ["28", "30"], ["38", "39"], ["41", "41"], ["55", "57"]];  
+            let nextTime = null;  
+            for (let i = 0; i < minutePairs.length; i++) {  
+                if (minutes < minutePairs[i][0]) {  
+                    nextTime = `${hours}:${minutePairs[i][0]} / ${hours}:${minutePairs[i][1]}`;  
+                    break;  
+                }  
+            }  
+            if (!nextTime) {  
+                nextTime = `${String((parseInt(hours) + 1) % 24).padStart(2, '0')}:${minutePairs[0][0]} / ${String((parseInt(hours) + 1) % 24).padStart(2, '0')}:${minutePairs[0][1]}`;  
+            }  
+            document.getElementById("nextTime").textContent = `ඊළඟ කාලය: ${nextTime}`;  
+        }  
+        setInterval(updateLiveTime, 1000);  
+        updateLiveTime();
+    </script>  
+</body>  
+</html>
